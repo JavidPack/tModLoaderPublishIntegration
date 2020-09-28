@@ -67,6 +67,12 @@ runs:
         echo pwd is: ${PWD}
         echo Build Mod
         ls -l
+        which dirname
+        which uname
+        which basename
+        which mv
+        which mono
+        which mkdir
         tModLoaderServer -build ModLoader/Mod\ Sources/TutorialMod
         echo Done
       shell: bash
