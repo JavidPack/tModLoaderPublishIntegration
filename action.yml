@@ -19,46 +19,29 @@ runs:
         pwd
       shell: bash
 
-    - run: echo Hello ${{ inputs.MODBROWSERPASSPHRASE }}.
-      shell: bash
-
-    - name: Test python shell command
-      run: |
-        import os
-        import sys
-        print(sys.version)
-        print(os.environ['PATH'])
-      shell: python
-
-    - name: Test python script
+    - name: Determine if build.txt is newer than Mod Browser
       run: python $GITHUB_ACTION_PATH/test.py
       shell: bash
       env:
         INPUT_STEAMID64: ${{ inputs.STEAMID64 }}
         INPUT_MODBROWSERPASSPHRASE: ${{ inputs.MODBROWSERPASSPHRASE }}
       
-    - name: Print some vars 
-      env:
-        SUPER_SECRET: 9999
+    - name: Build and Publish Mod if newer
       run: |
-        echo "$SUPER_SECRET"
-        echo "$INPUT_STEAMID64"
-        echo "$STEAMID64"
-        echo "$steamid64"
-        echo "$publishneeded"
-        echo "$PUBLISHNEEDED"
-        echo "Test"
-        echo "$INPUT_modbrowserpassphrase"
-        echo "$INPUT_MODBROWSERPASSPHRASE"
-        echo "$modbrowserpassphrase"
-        echo "$MODBROWSERPASSPHRASE"
-        pwd
-      shell: bash
-      
-    - name: Print a goodbye
-      run: |
-        echo Done.
-        pwd
+        if [ "$PUBLISH_NEEDED" != "yes" ]; then
+          echo "Publish Not Needed, skipping step."
+          exit
+        fi
+        echo Checking Mono version
+        mono -V
+        echo pwd is: ${PWD}
+        echo ls -l is:
+        ls -l
+        echo CD to Home
+        cd $HOME
+        echo pwd is: ${PWD}
+        echo ls -l is:
+        ls -l
       shell: bash
 
 branding:
