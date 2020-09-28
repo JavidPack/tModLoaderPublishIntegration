@@ -4,12 +4,12 @@ from distutils.version import LooseVersion
 
 if 'steamid64' in os.environ:
   print "steamid64:", os.environ['steamid64']
-else
+else:
   print "steamid64 not found"
 
 if 'modbrowserpassphrase' in os.environ:
   print "modbrowserpassphrase:", os.environ['modbrowserpassphrase']
-else
+else:
   print "modbrowserpassphrase not found"
   
 modBrowserVersionString = urllib2.urlopen("http://javid.ddns.net/tModLoader/tools/latestmodversionsimple.php?modname=BossChecklist").read().decode('utf-8')
