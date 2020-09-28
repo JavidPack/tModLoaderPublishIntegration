@@ -13,6 +13,16 @@ if 'modbrowserpassphrase' in os.environ:
 else:
   print "modbrowserpassphrase was not found"
   
+if 'INPUT_STEAMID64' in os.environ:
+  print "INPUT_STEAMID64:", os.environ['INPUT_STEAMID64']
+else:
+  print "INPUT_STEAMID64 was not found"
+
+if 'INPUT_MODBROWSERPASSPHRASE' in os.environ:
+  print "INPUT_MODBROWSERPASSPHRASE:", os.environ['INPUT_MODBROWSERPASSPHRASE']
+else:
+  print "INPUT_MODBROWSERPASSPHRASE was not found"
+  
 modBrowserVersionString = urllib2.urlopen("http://javid.ddns.net/tModLoader/tools/latestmodversionsimple.php?modname=BossChecklist").read().decode('utf-8')
 modBrowserVersion = LooseVersion(modBrowserVersionString[1:]) # v1.0
 print "Mod Browser version: " + str(modBrowserVersion)
