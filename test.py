@@ -4,11 +4,11 @@ import sys
 import urllib2
 from distutils.version import LooseVersion
 
-if environ.get('INPUT_STEAMID64') is None:
+if not environ.get('INPUT_STEAMID64'):
   sys.exit("INPUT_STEAMID64 not found")
-if environ.get('INPUT_MODBROWSERPASSPHRASE') is None:
+if not environ.get('INPUT_MODBROWSERPASSPHRASE'):
   sys.exit("INPUT_MODBROWSERPASSPHRASE not found")
-if environ.get('INPUT_MODNAME') is None:
+if not environ.get('INPUT_MODNAME'):
   sys.exit("INPUT_MODNAME not found")
 
 # TODO: Maybe allow publishing new mods too.
