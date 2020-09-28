@@ -21,13 +21,13 @@ print "build.txt version: " + str(buildVersion)
 print "Comparing versions: " + str(modBrowserVersion) + " < " + str(buildVersion)
 if modBrowserVersion < buildVersion:
     print "build.txt version newer. Update needed"
-    print "::set-env name=publishneeded::yes"
+    print "::set-env name=PUBLISH_NEEDED::yes"
     #open("buildneeded.txt", 'a').close()
     #not working for some reason, need to make file
     #os.environ['PUBLISHNEEDED'] = 'Yes'
     #exit(0)
 else:
     print "Mod Browser up-to-date. No need to update."
-    print "::set-env name=publishneeded::no"
+    print "::set-env name=PUBLISH_NEEDED::no"
     #os.environ['PUBLISHNEEDED'] = 'No'
     #exit(1)
