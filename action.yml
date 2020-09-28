@@ -41,6 +41,11 @@ runs:
         echo "$steamid64"
         echo "$publishneeded"
         echo "$PUBLISHNEEDED"
+        echo "Test"
+        echo "$INPUT_modbrowserpassphrase"
+        echo "$INPUT_MODBROWSERPASSPHRASE"
+        echo "$modbrowserpassphrase"
+        echo "$MODBROWSERPASSPHRASE"
         pwd
       shell: bash
       
