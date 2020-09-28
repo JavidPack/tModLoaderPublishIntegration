@@ -9,6 +9,9 @@ inputs:
     MODBROWSERPASSPHRASE:
         description: Mod Browser Passphrase corresponding to the provided steamid64. Please make sure to use the Secrets in Github, do not write your passphrase in plain text in your workflow file.
         required: true
+    MODNAME:
+        description: The internal name of the mod.
+        required: true
 
 runs:
   using: "composite"
@@ -25,6 +28,7 @@ runs:
       env:
         INPUT_STEAMID64: ${{ inputs.STEAMID64 }}
         INPUT_MODBROWSERPASSPHRASE: ${{ inputs.MODBROWSERPASSPHRASE }}
+        INPUT_MODNAME: ${{ inputs.MODNAME }}
       
     - name: Build and Publish Mod if newer
       run: |
@@ -32,6 +36,10 @@ runs:
           echo "Publish Not Needed, skipping step."
           exit
         fi
+        echo PUBLISH_NEEDED is $PUBLISH_NEEDED
+        echo INPUT_STEAMID64 is $INPUT_STEAMID64
+        echo INPUT_MODNAME is $INPUT_MODNAME
+        echo PUBLISH_NEEDED is $PUBLISH_NEEDED
         echo Checking Mono version
         mono -V
         echo pwd is: ${PWD}
@@ -39,10 +47,34 @@ runs:
         ls -l
         echo CD to Home
         cd $HOME
+        mkdir tModLoader
+        cd tModLoader
+        echo Downloading tModLoader
+        wget https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.5/tModLoader.Linux.v0.11.7.5.tar.gz
+        tar xvzf tModLoader.Linux*.tar.gz
+        echo Downloading ModCompile
+        curl -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.5/ModCompile_XNA.zip -o ModCompile.zip
+        mkdir ModCompile
+        unzip ModCompile.zip -d ./ModCompile
+        echo Upgrade to tModLoader-mono
+        cp ./tModLoader-mono ./tModLoaderServer
+        touch savehere.txt
+        mkdir -p ModLoader/Mod\ Sources/
         echo pwd is: ${PWD}
         echo ls -l is:
         ls -l
+        echo Copy Workspace to correct foldername for build
+        cp -r $GITHUB_WORKSPACE ModLoader/Mod\ Sources/TutorialMod
+        echo Build Mod
+        tModLoaderServer -build ModLoader/Mod\ Sources/TutorialMod
+        cd ModLoader/Mods
+        echo pwd is:
+        pwd
+        echo ls -l is:
+        ls -l
       shell: bash
+      env:
+        INPUT_STEAMID64: ${{ inputs.STEAMID64 }}
 
 branding:
     icon: server
