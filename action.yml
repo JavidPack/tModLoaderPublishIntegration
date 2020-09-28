@@ -68,7 +68,9 @@ runs:
         echo Build Mod
         ls -l
         ./tModLoaderServer -build ModLoader/Mod\ Sources/$INPUT_MODNAME
-        echo Done
+        echo Done Building
+        cd ModLoader/Mods
+        ls -l
       shell: bash
       env:
         INPUT_MODNAME: ${{ inputs.MODNAME }}
