@@ -47,7 +47,7 @@ runs:
         cd tModLoader
         echo Downloading tModLoader
         wget -q https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.5/tModLoader.Linux.v0.11.7.5.tar.gz
-        tar xvzf tModLoader.Linux*.tar.gz
+        tar xzf tModLoader.Linux*.tar.gz
         echo Downloading ModCompile
         curl -s -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.5/ModCompile_XNA.zip -o ModCompile.zip
         mkdir ModCompile
@@ -63,6 +63,7 @@ runs:
         cp -r $GITHUB_WORKSPACE ModLoader/Mod\ Sources/TutorialMod
         echo Build Mod
         chmod +x tModLoaderServer.bin.x86_64
+        ls -l
         tModLoaderServer -build ModLoader/Mod\ Sources/TutorialMod
         cd ModLoader/Mods
         echo pwd is:
