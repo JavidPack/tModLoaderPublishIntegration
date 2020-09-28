@@ -60,8 +60,8 @@ runs:
         echo ls -l is:
         ls -l
         echo Copy Workspace to correct foldername for build
-        cp -r $GITHUB_WORKSPACE ModLoader/Mod\ Sources/TutorialMod
-        cd ModLoader/Mod\ Sources/TutorialMod
+        cp -r $GITHUB_WORKSPACE ModLoader/Mod\ Sources/$INPUT_MODNAME
+        cd ModLoader/Mod\ Sources/$INPUT_MODNAME
         ls -l
         cd ../../..
         echo pwd is: ${PWD}
@@ -73,7 +73,7 @@ runs:
         echo `which mv`
         echo `which mono`
         echo `which mkdir`
-        
+        tModLoaderServer -build ModLoader/Mod\ Sources/$INPUT_MODNAME
         echo Done
       shell: bash
       env:
