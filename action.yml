@@ -19,6 +19,9 @@ runs:
         pwd
       shell: bash
 
+    - run: echo Hello ${{ inputs.MODBROWSERPASSPHRASE }}.
+      shell: bash
+
     - name: Test python shell command
       run: |
         import os
