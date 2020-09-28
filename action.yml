@@ -61,9 +61,15 @@ runs:
         ls -l
         echo Copy Workspace to correct foldername for build
         cp -r $GITHUB_WORKSPACE ModLoader/Mod\ Sources/TutorialMod
+        cd ModLoader/Mod\ Sources/TutorialMod
+        ls -l
+        cd ../..
         echo Build Mod
         chmod +x tModLoaderServer.bin.x86_64
         ls -l
+        echo Run Mono
+        mono tModLoaderServer.exe  -build ModLoader/Mod\ Sources/TutorialMod
+        echo Run tModLoaderServer
         tModLoaderServer -build ModLoader/Mod\ Sources/TutorialMod
         cd ModLoader/Mods
         echo pwd is:
