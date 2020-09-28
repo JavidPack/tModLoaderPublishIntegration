@@ -32,7 +32,7 @@ runs:
       
     - name: Build and Publish Mod if newer
       run: |
-        if [ -z "$MODNAME" ]; then
+        if [ -z "$INPUT_MODNAME" ]; then
           echo "MODNAME Not provided, mod publish failure."
           exit
         fi
