@@ -1,28 +1,14 @@
 import os
+import sys
 import urllib2
 from distutils.version import LooseVersion
 
-print os.environ
-if 'STEAMID64' in os.environ:
-  print "STEAMID64:", os.environ['STEAMID64']
-else:
-  print "STEAMID64 was not found"
+if 'INPUT_STEAMID64' not in os.environ:
+  sys.exit("INPUT_STEAMID64 not found")
 
-if 'MODBROWSERPASSPHRASE' in os.environ:
-  print "MODBROWSERPASSPHRASE:", os.environ['MODBROWSERPASSPHRASE']
-else:
-  print "MODBROWSERPASSPHRASE was not found"
-  
-if 'INPUT_STEAMID64' in os.environ:
-  print "INPUT_STEAMID64:", os.environ['INPUT_STEAMID64']
-else:
-  print "INPUT_STEAMID64 was not found"
+if 'INPUT_MODBROWSERPASSPHRASE' not in os.environ:
+  sys.exit("INPUT_MODBROWSERPASSPHRASE not found")
 
-if 'INPUT_MODBROWSERPASSPHRASE' in os.environ:
-  print "INPUT_MODBROWSERPASSPHRASE:", os.environ['INPUT_MODBROWSERPASSPHRASE']
-else:
-  print "INPUT_MODBROWSERPASSPHRASE was not found"
-  
 modBrowserVersionString = urllib2.urlopen("http://javid.ddns.net/tModLoader/tools/latestmodversionsimple.php?modname=BossChecklist").read().decode('utf-8')
 modBrowserVersion = LooseVersion(modBrowserVersionString[1:]) # v1.0
 print "Mod Browser version: " + str(modBrowserVersion)
@@ -35,10 +21,8 @@ print "build.txt version: " + str(buildVersion)
 print "Comparing versions: " + str(modBrowserVersion) + " < " + str(buildVersion)
 if modBrowserVersion < buildVersion:
     print "build.txt version newer. Update needed"
-    
     print "::set-env name=publishneeded::yes"
-    
-    open("buildneeded.txt", 'a').close()
+    #open("buildneeded.txt", 'a').close()
     #not working for some reason, need to make file
     #os.environ['PUBLISHNEEDED'] = 'Yes'
     #exit(0)
