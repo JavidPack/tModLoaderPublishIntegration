@@ -28,7 +28,7 @@ runs:
       shell: python
 
     - name: Test python script
-      run: python test.py
+      run: python $GITHUB_ACTION_PATH/test.py
       shell: bash
       
     - name: Print a goodbye
