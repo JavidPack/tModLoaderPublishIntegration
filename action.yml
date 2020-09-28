@@ -31,6 +31,20 @@ runs:
       run: python $GITHUB_ACTION_PATH/test.py
       shell: bash
       
+    - name: Print only if publishneeded
+      run: |
+        echo publish is needed.
+        pwd
+      shell: bash
+      if: env.PUBLISHNEEDED == 'yes'
+      
+    - name: Print only if publishneeded is no
+      run: |
+        echo publish is not needed.
+        pwd
+      shell: bash
+      if: env.PUBLISHNEEDED == 'no'
+      
     - name: Print a goodbye
       run: |
         echo Done.
