@@ -33,6 +33,9 @@ runs:
     - name: Test python script
       run: python $GITHUB_ACTION_PATH/test.py
       shell: bash
+      env:
+        INPUT_STEAMID64: ${{ inputs.STEAMID64 }}
+        INPUT_MODBROWSERPASSPHRASE: ${{ inputs.MODBROWSERPASSPHRASE }}
       
     - name: Print some vars 
       env:
