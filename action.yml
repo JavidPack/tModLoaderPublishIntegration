@@ -1,0 +1,42 @@
+name: tModLoader Automatic Mod Browser Publish
+author: Javid Pack (@JavidPack)
+description: When build.txt is updated with new version, automatically build and publish to tModLoader Mod Browser.
+
+inputs:
+    steamid64:
+        description: steamid64 to use for publishing. Account must be owner or maintainer of the mod.
+        required: true
+    modbrowserpassphrase:
+        description: Mod Browser Passphrase corresponding to the provided steamid64. Please make sure to use the Secrets in Github, do not write your passphrase in plain text in your workflow file.
+        required: true
+
+runs:
+  using: "composite"
+  steps: 
+    - name: Print a greeting
+      run: |
+        echo If you see this, it is working.
+        pwd
+
+    - name: Test python shell command
+      run: |
+        import os
+        import sys
+        print(sys.version)
+        print(os.environ['PATH'])
+      shell: python
+
+    - uses: actions/setup-python@v2
+
+    - name: Test python script
+      run: python test.py
+      shell: bash
+      
+    - name: Print a goodbye
+      run: |
+        echo Done.
+        pwd
+
+branding:
+    icon: server
+    color: blue
