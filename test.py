@@ -1,15 +1,21 @@
 import os
+from os import environ
 import sys
 import urllib2
 from distutils.version import LooseVersion
 
-if 'INPUT_STEAMID64' not in os.environ:
+if environ.get('INPUT_STEAMID64') is None:
   sys.exit("INPUT_STEAMID64 not found")
-
-if 'INPUT_MODBROWSERPASSPHRASE' not in os.environ:
+if environ.get('INPUT_MODBROWSERPASSPHRASE') is None:
   sys.exit("INPUT_MODBROWSERPASSPHRASE not found")
+if environ.get('INPUT_MODNAME') is None:
+  sys.exit("INPUT_MODNAME not found")
 
-modBrowserVersionString = urllib2.urlopen("http://javid.ddns.net/tModLoader/tools/latestmodversionsimple.php?modname=BossChecklist").read().decode('utf-8')
+# TODO: Maybe allow publishing new mods too.
+modBrowserVersionString = urllib2.urlopen("http://javid.ddns.net/tModLoader/tools/latestmodversionsimple.php?modname=" + environ.get('INPUT_MODNAME')).read().decode('utf-8')
+if not modBrowserVersionString:
+  sys.exit(environ.get('INPUT_MODNAME') + " not found on the Mod Browser, are you sure you have published this mod?")
+
 modBrowserVersion = LooseVersion(modBrowserVersionString[1:]) # v1.0
 print "Mod Browser version: " + str(modBrowserVersion)
 with open("build.txt") as fh:
@@ -22,12 +28,6 @@ print "Comparing versions: " + str(modBrowserVersion) + " < " + str(buildVersion
 if modBrowserVersion < buildVersion:
     print "build.txt version newer. Update needed"
     print "::set-env name=PUBLISH_NEEDED::yes"
-    #open("buildneeded.txt", 'a').close()
-    #not working for some reason, need to make file
-    #os.environ['PUBLISHNEEDED'] = 'Yes'
-    #exit(0)
 else:
     print "Mod Browser up-to-date. No need to update."
     print "::set-env name=PUBLISH_NEEDED::no"
-    #os.environ['PUBLISHNEEDED'] = 'No'
-    #exit(1)
