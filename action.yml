@@ -64,16 +64,8 @@ runs:
         cd ModLoader/Mod\ Sources/TutorialMod
         ls -l
         cd ../..
+        echo pwd is: ${PWD}
         echo Build Mod
-        ls -l
-        echo Run Mono
-        mono tModLoaderServer.exe  -build ModLoader/Mod\ Sources/TutorialMod
-        echo Run tModLoaderServer
-        tModLoaderServer -build ModLoader/Mod\ Sources/TutorialMod
-        cd ModLoader/Mods
-        echo pwd is:
-        pwd
-        echo ls -l is:
         ls -l
       shell: bash
       env:
