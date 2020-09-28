@@ -65,7 +65,6 @@ runs:
         ls -l
         cd ../..
         echo Build Mod
-        chmod +x tModLoaderServer.bin.x86_64
         ls -l
         echo Run Mono
         mono tModLoaderServer.exe  -build ModLoader/Mod\ Sources/TutorialMod
