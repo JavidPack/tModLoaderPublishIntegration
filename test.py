@@ -3,15 +3,15 @@ import urllib2
 from distutils.version import LooseVersion
 
 print os.environ
-if 'steamid64' in os.environ:
-  print "steamid64:", os.environ['steamid64']
+if 'STEAMID64' in os.environ:
+  print "STEAMID64:", os.environ['STEAMID64']
 else:
-  print "steamid64 was not found"
+  print "STEAMID64 was not found"
 
-if 'modbrowserpassphrase' in os.environ:
-  print "modbrowserpassphrase:", os.environ['modbrowserpassphrase']
+if 'MODBROWSERPASSPHRASE' in os.environ:
+  print "MODBROWSERPASSPHRASE:", os.environ['MODBROWSERPASSPHRASE']
 else:
-  print "modbrowserpassphrase was not found"
+  print "MODBROWSERPASSPHRASE was not found"
   
 if 'INPUT_STEAMID64' in os.environ:
   print "INPUT_STEAMID64:", os.environ['INPUT_STEAMID64']
