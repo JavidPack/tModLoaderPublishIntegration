@@ -27,8 +27,6 @@ runs:
         print(os.environ['PATH'])
       shell: python
 
-#    - uses: actions/setup-python@v2
-
     - name: Test python script
       run: python test.py
       shell: bash
