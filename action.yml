@@ -46,10 +46,10 @@ runs:
         mkdir tModLoader
         cd tModLoader
         echo Downloading tModLoader
-        wget -q https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.5/tModLoader.Linux.v0.11.7.5.tar.gz
+        wget -q https://www.dropbox.com/s/h44dyax4dgqsx5v/tModLoader%20Linux%20v0.11.7.6%20Beta%203.tar.gz?dl=0
         tar xzf tModLoader.Linux*.tar.gz
         echo Downloading ModCompile
-        curl -s -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.5/ModCompile_XNA.zip -o ModCompile.zip
+        curl -s -L https://www.dropbox.com/s/oxqaxjfxr9o6a9s/ModCompile_XNA.zip?dl=0 -o ModCompile.zip
         mkdir ModCompile
         unzip -q ModCompile.zip -d ./ModCompile
         echo Upgrade to tModLoader-mono
@@ -71,8 +71,14 @@ runs:
         echo Done Building
         cd ModLoader/Mods
         ls -l
+        cd ../..
+        echo Publish Mod
+        ./tModLoaderServer -publish $INPUT_MODNAME -passphrase $INPUT_MODBROWSERPASSPHRASE -steamid64 $INPUT_STEAMID64
+        echo Publish complete
       shell: bash
       env:
+        INPUT_STEAMID64: ${{ inputs.STEAMID64 }}
+        INPUT_MODBROWSERPASSPHRASE: ${{ inputs.MODBROWSERPASSPHRASE }}
         INPUT_MODNAME: ${{ inputs.MODNAME }}
 
 branding:
