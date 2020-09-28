@@ -16,12 +16,6 @@ inputs:
 runs:
   using: "composite"
   steps: 
-    - name: Print a greeting
-      run: |
-        echo If you see this, it is working.
-        pwd
-      shell: bash
-
     - name: Determine if build.txt is newer than Mod Browser
       run: python $GITHUB_ACTION_PATH/test.py
       shell: bash
@@ -53,7 +47,7 @@ runs:
         cd tModLoader
         echo Downloading tModLoader
         wget -q https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.5/tModLoader.Linux.v0.11.7.5.tar.gz
-        tar xvzfq tModLoader.Linux*.tar.gz
+        tar xvzf tModLoader.Linux*.tar.gz
         echo Downloading ModCompile
         curl -s -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.5/ModCompile_XNA.zip -o ModCompile.zip
         mkdir ModCompile
