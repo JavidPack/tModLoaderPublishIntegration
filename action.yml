@@ -17,6 +17,7 @@ runs:
       run: |
         echo If you see this, it is working.
         pwd
+      shell: bash
 
     - name: Test python shell command
       run: |
@@ -36,6 +37,7 @@ runs:
       run: |
         echo Done.
         pwd
+      shell: bash
 
 branding:
     icon: server
