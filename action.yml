@@ -3,10 +3,10 @@ author: Javid Pack (@JavidPack)
 description: When build.txt is updated with new version, automatically build and publish to tModLoader Mod Browser.
 
 inputs:
-    steamid64:
+    STEAMID64:
         description: steamid64 to use for publishing. Account must be owner or maintainer of the mod.
         required: true
-    modbrowserpassphrase:
+    MODBROWSERPASSPHRASE:
         description: Mod Browser Passphrase corresponding to the provided steamid64. Please make sure to use the Secrets in Github, do not write your passphrase in plain text in your workflow file.
         required: true
 
