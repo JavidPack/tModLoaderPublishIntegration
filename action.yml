@@ -46,7 +46,7 @@ runs:
         mkdir tModLoader
         cd tModLoader
         echo Downloading tModLoader
-        wget -q -o tModLoader.Linux.v0.11.7.6.Beta.3.tar.gz https://www.dropbox.com/s/h44dyax4dgqsx5v/tModLoader%20Linux%20v0.11.7.6%20Beta%203.tar.gz?dl=0
+        wget -q -O tModLoader.Linux.v0.11.7.6.Beta.3.tar.gz https://www.dropbox.com/s/h44dyax4dgqsx5v/tModLoader%20Linux%20v0.11.7.6%20Beta%203.tar.gz?dl=0
         tar xzf tModLoader.Linux*.tar.gz
         echo Downloading ModCompile
         curl -s -L https://www.dropbox.com/s/oxqaxjfxr9o6a9s/ModCompile_XNA.zip?dl=0 -o ModCompile.zip
