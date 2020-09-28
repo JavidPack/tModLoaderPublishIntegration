@@ -31,19 +31,18 @@ runs:
       run: python $GITHUB_ACTION_PATH/test.py
       shell: bash
       
-    - name: Print only if publishneeded
+    - name: Print some vars 
+      env:
+        SUPER_SECRET: 9999
       run: |
-        echo publish is needed.
+        echo "$SUPER_SECRET"
+        echo "$INPUT_STEAMID64"
+        echo "$STEAMID64"
+        echo "$steamid64"
+        echo "$publishneeded"
+        echo "$PUBLISHNEEDED"
         pwd
       shell: bash
-      if: env.PUBLISHNEEDED == 'yes'
-      
-    - name: Print only if publishneeded is no
-      run: |
-        echo publish is not needed.
-        pwd
-      shell: bash
-      if: env.PUBLISHNEEDED == 'no'
       
     - name: Print a goodbye
       run: |
