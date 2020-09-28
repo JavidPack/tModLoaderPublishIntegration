@@ -2,6 +2,7 @@ import os
 import urllib2
 from distutils.version import LooseVersion
 
+print os.environ
 if 'steamid64' in os.environ:
   print "steamid64:", os.environ['steamid64']
 else:
