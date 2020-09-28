@@ -67,7 +67,7 @@ runs:
         echo pwd is: ${PWD}
         echo Build Mod
         ls -l
-        mono tModLoaderServer.exe  -build ModLoader/Mod\ Sources/TutorialMod
+        tModLoaderServer -build ModLoader/Mod\ Sources/TutorialMod
         echo Done
       shell: bash
       env:
