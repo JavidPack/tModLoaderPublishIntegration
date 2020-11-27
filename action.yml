@@ -17,7 +17,7 @@ runs:
   using: "composite"
   steps: 
     - name: Determine if build.txt is newer than Mod Browser
-      run: python $GITHUB_ACTION_PATH/test.py
+      run: python $GITHUB_ACTION_PATH/CheckBuildTxtVersion.py
       shell: bash
       env:
         INPUT_STEAMID64: ${{ inputs.STEAMID64 }}
@@ -46,10 +46,10 @@ runs:
         mkdir tModLoader
         cd tModLoader
         echo Downloading tModLoader
-        wget -q -O tModLoader.Linux.v0.11.7.6.Beta.3.tar.gz https://www.dropbox.com/s/h44dyax4dgqsx5v/tModLoader%20Linux%20v0.11.7.6%20Beta%203.tar.gz?dl=0
+        wget -q -O tModLoader.Linux.v0.11.7.8.tar.gz https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.8/tModLoader.Linux.v0.11.7.8.tar.gz
         tar xzf tModLoader.Linux*.tar.gz
         echo Downloading ModCompile
-        curl -s -L https://www.dropbox.com/s/oxqaxjfxr9o6a9s/ModCompile_XNA.zip?dl=0 -o ModCompile.zip
+        curl -s -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.8/ModCompile_XNA.zip -o ModCompile.zip
         mkdir ModCompile
         unzip -q ModCompile.zip -d ./ModCompile
         echo Upgrade to tModLoader-mono
