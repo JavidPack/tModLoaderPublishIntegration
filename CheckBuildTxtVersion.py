@@ -27,7 +27,11 @@ print "build.txt version: " + str(buildVersion)
 print "Comparing versions: " + str(modBrowserVersion) + " < " + str(buildVersion)
 if modBrowserVersion < buildVersion:
     print "build.txt version newer. Update needed"
-    print "::set-env name=PUBLISH_NEEDED::yes"
+    with open(environ.get('GITHUB_ENV'), 'a') as file1: 
+        file1.write("PUBLISH_NEEDED=yes") 
+    #print "::set-env name=PUBLISH_NEEDED::yes"
 else:
     print "Mod Browser up-to-date. No need to update."
-    print "::set-env name=PUBLISH_NEEDED::no"
+    with open(environ.get('GITHUB_ENV'), 'a') as file1: 
+        file1.write("PUBLISH_NEEDED=no") 
+    #print "::set-env name=PUBLISH_NEEDED::no"
