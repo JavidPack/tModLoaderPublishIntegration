@@ -23,18 +23,12 @@ runs:
         INPUT_STEAMID64: ${{ inputs.STEAMID64 }}
         INPUT_MODBROWSERPASSPHRASE: ${{ inputs.MODBROWSERPASSPHRASE }}
         INPUT_MODNAME: ${{ inputs.MODNAME }}
-      
-    - name: Build and Publish Mod if newer
+    - name: Build Mod
       run: |
         if [ -z "$INPUT_MODNAME" ]; then
           echo "MODNAME Not provided, mod publish failure."
           exit
         fi
-        if [ "$PUBLISH_NEEDED" != "yes" ]; then
-          echo "Publish Not Needed, skipping step."
-          exit
-        fi
-        echo PUBLISH_NEEDED is $PUBLISH_NEEDED
         echo INPUT_MODNAME is $INPUT_MODNAME
         echo Checking Mono version
         mono -V
@@ -71,6 +65,18 @@ runs:
         echo Done Building
         cd ModLoader/Mods
         ls -l
+      shell: bash
+      env:
+        INPUT_STEAMID64: ${{ inputs.STEAMID64 }}
+        INPUT_MODBROWSERPASSPHRASE: ${{ inputs.MODBROWSERPASSPHRASE }}
+        INPUT_MODNAME: ${{ inputs.MODNAME }}
+    - name: Publish Mod if newer
+      run: |
+        if [ "$PUBLISH_NEEDED" != "yes" ]; then
+          echo "Publish Not Needed, skipping step."
+          exit
+        fi
+        echo PUBLISH_NEEDED is $PUBLISH_NEEDED
         cd ../..
         echo Publish Mod
         ./tModLoaderServer -publish $INPUT_MODNAME -passphrase $INPUT_MODBROWSERPASSPHRASE -steamid64 $INPUT_STEAMID64
