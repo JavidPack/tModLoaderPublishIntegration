@@ -45,8 +45,8 @@ runs:
         unzip -q ModCompile.zip -d ./ModCompile
         touch savehere.txt
         echo Installing XNA
-        curl -s -L https://download.microsoft.com/download/A/C/2/AC2C903B-E6E8-42C2-9FD7-BEBAC362A930/xnafx40_redist.msi -O
-        msiexec.exe /i xnafx40_redist.msi /QN
+        curl -s -L https://download.microsoft.com/download/5/3/A/53A804C8-EC78-43CD-A0F0-2FB4D45603D3/xnafx40_redist.msi -O
+        msiexec.exe /i xnafx40_redist.msi /QN /norestart
         mkdir -p ModLoader/Mod\ Sources/
         echo pwd is: ${PWD}
         echo ls -l is:
