@@ -44,11 +44,9 @@ runs:
         curl -s -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.8/ModCompile_FNA.zip -o ModCompile.zip
         unzip -q ModCompile.zip -d ./ModCompile
         touch savehere.txt
-        echo Downloading XNA dlls
-        curl -s -L https://github.com/Dradonhunter11/tModLoader64bit/raw/master/references/Microsoft.Xna.Framework.dll -O
-        curl -s -L https://github.com/Dradonhunter11/tModLoader64bit/raw/master/references/Microsoft.Xna.Framework.Xact.dll -O
-        curl -s -L https://github.com/Dradonhunter11/tModLoader64bit/raw/master/references/Microsoft.Xna.Framework.Graphics.dll -O
-        curl -s -L https://github.com/Dradonhunter11/tModLoader64bit/raw/master/references/Microsoft.Xna.Framework.Game.dll -O
+        echo Installing XNA
+        curl -s -L https://download.microsoft.com/download/A/C/2/AC2C903B-E6E8-42C2-9FD7-BEBAC362A930/xnafx40_redist.msi -O
+        msiexec.exe /i xnafx40_redist.msi /QN
         mkdir -p ModLoader/Mod\ Sources/
         echo pwd is: ${PWD}
         echo ls -l is:
