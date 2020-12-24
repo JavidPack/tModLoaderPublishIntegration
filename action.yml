@@ -25,6 +25,7 @@ runs:
         INPUT_MODNAME: ${{ inputs.MODNAME }}
     - name: Install XNA
       run: choco --yes install xna
+      shell: bash
     - name: Build Mod
       run: |
         if [ -z "$INPUT_MODNAME" ]; then
