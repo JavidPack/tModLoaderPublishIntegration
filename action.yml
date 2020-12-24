@@ -30,8 +30,6 @@ runs:
           exit
         fi
         echo INPUT_MODNAME is $INPUT_MODNAME
-        echo Checking Mono version
-        mono -V
         echo pwd is: ${PWD}
         echo ls -l is:
         ls -l
@@ -40,14 +38,11 @@ runs:
         mkdir tModLoader
         cd tModLoader
         echo Downloading tModLoader
-        wget -q -O tModLoader.Linux.v0.11.7.8.tar.gz https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.8/tModLoader.Linux.v0.11.7.8.tar.gz
-        tar xzf tModLoader.Linux*.tar.gz
+        curl -s -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.8/tModLoader.Windows.v0.11.7.8.zip -o tModLoader.zip
+        unzip -q tModLoader.zip
         echo Downloading ModCompile
-        curl -s -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.8/ModCompile_XNA.zip -o ModCompile.zip
-        mkdir ModCompile
+        curl -s -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.8/ModCompile_FNA.zip -o ModCompile.zip
         unzip -q ModCompile.zip -d ./ModCompile
-        echo Upgrade to tModLoader-mono
-        cp ./tModLoader-mono ./tModLoaderServer
         touch savehere.txt
         mkdir -p ModLoader/Mod\ Sources/
         echo pwd is: ${PWD}
