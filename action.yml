@@ -23,6 +23,8 @@ runs:
         INPUT_STEAMID64: ${{ inputs.STEAMID64 }}
         INPUT_MODBROWSERPASSPHRASE: ${{ inputs.MODBROWSERPASSPHRASE }}
         INPUT_MODNAME: ${{ inputs.MODNAME }}
+    - name: Install XNA
+      run: choco --yes install xna
     - name: Build Mod
       run: |
         if [ -z "$INPUT_MODNAME" ]; then
@@ -44,9 +46,6 @@ runs:
         curl -s -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.8/ModCompile_FNA.zip -o ModCompile.zip
         unzip -q ModCompile.zip -d ./ModCompile
         touch savehere.txt
-        echo Installing XNA
-        curl -s -L https://download.microsoft.com/download/5/3/A/53A804C8-EC78-43CD-A0F0-2FB4D45603D3/xnafx40_redist.msi -O
-        msiexec.exe /i xnafx40_redist.msi /QN /norestart
         mkdir -p ModLoader/Mod\ Sources/
         echo pwd is: ${PWD}
         echo ls -l is:
