@@ -23,10 +23,6 @@ runs:
         INPUT_STEAMID64: ${{ inputs.STEAMID64 }}
         INPUT_MODBROWSERPASSPHRASE: ${{ inputs.MODBROWSERPASSPHRASE }}
         INPUT_MODNAME: ${{ inputs.MODNAME }}
-    - name: grant Full Access to c:\windows\temp directory
-      run: |
-        icacls "C:\Windows\Temp" /q /c /t /grant Users:F /T
-      shell: bash
     - name: Build Mod
       run: |
         if [ -z "$INPUT_MODNAME" ]; then
@@ -50,7 +46,7 @@ runs:
         touch savehere.txt
         echo Installing XNA
         curl -s -L https://download.microsoft.com/download/5/3/A/53A804C8-EC78-43CD-A0F0-2FB4D45603D3/xnafx40_redist.msi -O
-        msiexec /i xnafx40_redist.msi /quiet
+        msiexec //i xnafx40_redist.msi //quiet
         echo XNA Installed
         mkdir -p ModLoader/Mod\ Sources/
         echo pwd is: ${PWD}
