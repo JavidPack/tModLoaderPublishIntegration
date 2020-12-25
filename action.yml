@@ -63,8 +63,10 @@ runs:
         echo Initialize tModLoader.targets
         ./tModLoaderServer -build ModLoader/Mod\ Sources/$INPUT_MODNAME
         echo Build XNA dll
+        cd ModLoader/Mod\ Sources/$INPUT_MODNAME
         nuget restore
         msbuild
+        cd ../../..
         echo Build tmod file
         ./tModLoaderServer -build ModLoader/Mod\ Sources/$INPUT_MODNAME -eac ModLoader/Mod\ Sources/$INPUT_MODNAME/bin/Debug/net45/$INPUT_MODNAME.dll -unsafe false
         echo Done Building
