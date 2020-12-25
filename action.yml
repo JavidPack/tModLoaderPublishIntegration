@@ -61,7 +61,7 @@ runs:
         echo Building Mod
         ls -l
         echo Initialize tModLoader.targets
-        ./tModLoaderServer -build
+        ./tModLoaderServer -build ModLoader/Mod\ Sources/$INPUT_MODNAME
         echo Build XNA dll
         nuget restore
         msbuild
