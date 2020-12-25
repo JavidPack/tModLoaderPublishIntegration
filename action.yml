@@ -23,6 +23,9 @@ runs:
         INPUT_STEAMID64: ${{ inputs.STEAMID64 }}
         INPUT_MODBROWSERPASSPHRASE: ${{ inputs.MODBROWSERPASSPHRASE }}
         INPUT_MODNAME: ${{ inputs.MODNAME }}
+    - name: grant Full Access to c:\windows\temp directory
+      run: |
+        icacls "C:\Windows\Temp" /q /c /t /grant Users:F /T
     - name: Build Mod
       run: |
         if [ -z "$INPUT_MODNAME" ]; then
