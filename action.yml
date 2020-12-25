@@ -58,9 +58,15 @@ runs:
         ls -l
         cd ../../..
         echo pwd is: ${PWD}
-        echo Build Mod
+        echo Building Mod
         ls -l
-        ./tModLoaderServer -build ModLoader/Mod\ Sources/$INPUT_MODNAME
+        echo Initialize tModLoader.targets
+        ./tModLoaderServer -build
+        echo Build XNA dll
+        nuget restore
+        msbuild
+        echo Build tmod file
+        ./tModLoaderServer -build ModLoader/Mod\ Sources/$INPUT_MODNAME -eac ModLoader/Mod\ Sources/$INPUT_MODNAME/bin/Debug/net45/$INPUT_MODNAME.dll -unsafe false
         echo Done Building
         cd ModLoader/Mods
         ls -l
