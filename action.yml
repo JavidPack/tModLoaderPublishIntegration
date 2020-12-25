@@ -64,7 +64,7 @@ runs:
         ./tModLoaderServer -build ModLoader/Mod\ Sources/$INPUT_MODNAME
         echo Build XNA dll
         cd ModLoader/Mod\ Sources/$INPUT_MODNAME
-        nuget restore
+        dotnet restore
         msbuild
         cd ../../..
         echo Build tmod file
