@@ -1,6 +1,6 @@
 name: tModLoader Automatic Mod Browser Publish
 author: Javid Pack (@JavidPack)
-description: When build.txt is updated with new version, automatically build and publish to tModLoader Mod Browser.
+description: When build.txt is updated with new version, automatically build and publish to tModLoader Mod Browser. Must execute on windows runner.
 
 inputs:
     STEAMID64:
@@ -38,10 +38,10 @@ runs:
         mkdir tModLoader
         cd tModLoader
         echo Downloading tModLoader
-        curl -s -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.8/tModLoader.Windows.v0.11.7.8.zip -o tModLoader.zip
+        curl -s -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.8/tModLoader.Windows.v0.11.8.zip -o tModLoader.zip
         unzip -q tModLoader.zip
         echo Downloading ModCompile
-        curl -s -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.7.8/ModCompile_FNA.zip -o ModCompile.zip
+        curl -s -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.8/ModCompile_FNA.zip -o ModCompile.zip
         unzip -q ModCompile.zip -d ./ModCompile
         touch savehere.txt
         echo Installing XNA
