@@ -84,7 +84,10 @@ runs:
           exit
         fi
         echo PUBLISH_NEEDED is $PUBLISH_NEEDED
-        cd ../..
+        echo pwd is: ${PWD}
+        cd $HOME
+        cd tModLoader
+        echo pwd is: ${PWD}
         echo Publish Mod
         ./tModLoaderServer -publish $INPUT_MODNAME -passphrase $INPUT_MODBROWSERPASSPHRASE -steamid64 $INPUT_STEAMID64
         echo Publish complete
