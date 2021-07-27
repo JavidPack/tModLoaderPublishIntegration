@@ -10,8 +10,9 @@ inputs:
         description: Mod Browser Passphrase corresponding to the provided steamid64. Please make sure to use the Secrets in Github, do not write your passphrase in plain text in your workflow file.
         required: true
     MODNAME:
-        description: The internal name of the mod.
-        required: true
+        description: The internal name of the mod. Defaults to the repository name.
+        required: false
+        default: ${{ github.event.repository.name }}
 
 runs:
   using: "composite"
@@ -38,10 +39,10 @@ runs:
         mkdir tModLoader
         cd tModLoader
         echo Downloading tModLoader
-        curl -s -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.8.3/tModLoader.Windows.v0.11.8.3.zip -o tModLoader.zip
+        curl -s -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.8.4/tModLoader.Windows.v0.11.8.4.zip -o tModLoader.zip
         unzip -q tModLoader.zip
         echo Downloading ModCompile
-        curl -s -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.8.3/ModCompile_FNA.zip -o ModCompile.zip
+        curl -s -L https://github.com/tModLoader/tModLoader/releases/download/v0.11.8.4/ModCompile_FNA.zip -o ModCompile.zip
         unzip -q ModCompile.zip -d ./ModCompile
         touch savehere.txt
         echo Installing XNA
