@@ -6,21 +6,14 @@ on:
       MODNAME:
         description: The internal name of the mod. Defaults to the repository name.
         required: false
+        type: string
         default: ${{ github.event.repository.name }}
-        type: string
-      testInput:
-        required: true
-        type: string
       UploadArtifact:
         description: Determines if the .tmod file should be uploaded as a build artifact for all commits. This .tmod can be used by testers before an actual update is published to the Steam workshop. Defaults to true.
         required: false
         type: boolean
         default: true
     secrets:
-      testsecret:
-        required: true
-      STEAM_SENTRY_PASSPHRASE:
-        required: true
       STEAM_SENTRY_FILENAME:
         required: true
       STEAM_SENTRY_FILE:
@@ -46,31 +39,21 @@ jobs:
       
       - name: Setup Authentication Files
         shell: bash
+        working-directory: ${{ steps.setupsteam.outputs.directory }}
         run: |
-          ls -l
-          echo "$STEAM_SENTRY_FILE" > ssfn_temp
-          ls -l
-          Certutil -decode ssfn_temp $STEAM_SENTRY_FILENAME
-          ls -l
+          echo pwd is: ${PWD}
+          echo "$STEAM_SENTRY_FILE" > encoded_ssfn
+          Certutil -decode encoded_ssfn $STEAM_SENTRY_FILENAME
           Certutil -hashfile $STEAM_SENTRY_FILENAME
+          ls -l
         env:
           STEAM_SENTRY_FILENAME: ${{ secrets.STEAM_SENTRY_FILENAME }}
           STEAM_SENTRY_FILE: ${{ secrets.STEAM_SENTRY_FILE }}
-      
-      - name: Setup Authentication Files
-        shell: bash
-        run: |
-          echo Decrypting Authentication Files
-          gpg --quiet --batch --yes --decrypt --passphrase="$STEAM_SENTRY_PASSPHRASE" --output ~/Steam/$STEAM_SENTRY_FILENAME ./solutions/Manifests/secret.gpg
-          
-        env:
-          STEAM_SENTRY_PASSPHRASE: ${{ secrets.STEAM_SENTRY_PASSPHRASE }}
-          STEAM_SENTRY_FILENAME: ${{ secrets.STEAM_SENTRY_FILENAME }}
-          STEAMCMDDIR: ${{ steps.setupsteam.outputs.directory }}
-      
+
       - name: Install tModLoader public-1.4-alpha via Steam
         shell: bash
         run: |
+          echo pwd is: ${PWD}
           steamcmd.exe +login anonymous +quit
           ls -l
         
@@ -86,17 +69,13 @@ jobs:
         run: |
           echo pwd is: ${PWD}
           echo MODNAME is: ${MODNAME}
-          echo testsecret is: ${testsecret}
           echo UploadArtifact is: ${UploadArtifact}
-          echo testInput is: ${testInput}
           echo hello > Test.txt
           ls -l
           dotnet --version
         env:
           MODNAME: ${{ inputs.MODNAME }}
           UploadArtifact: ${{ inputs.UploadArtifact }}
-          testInput: ${{ inputs.testInput }}
-          testsecret: ${{ secrets.testsecret }}
           
       - name: Upload Release Build Artifact
         if: ${{ inputs.UploadArtifact }}
