@@ -1,0 +1,50 @@
+name: Reusable workflow example
+
+on:
+  workflow_call:
+    inputs:
+      MODNAME:
+        description: The internal name of the mod. Defaults to the repository name.
+        required: false
+        default: ${{ github.event.repository.name }}
+      testInput:
+        required: true
+        type: string
+      UploadArtifact:
+        description: Determines if the .tmod file should be uploaded as a build artifact for all commits. This .tmod can be used by testers before an actual update is published to the Steam workshop. Defaults to true.
+        required: false
+        type: boolean
+        default: true
+    secrets:
+      testsecret:
+        required: true
+
+jobs:
+  example_job:
+    name: Pass input and secrets to my-action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Setup steamcmd
+        id: setupsteam
+        uses: CyberAndrii/setup-steamcmd@v1
+        
+      - name: Echo Inputs
+        shell: bash
+        run: |
+          echo pwd is: ${PWD}
+          ls -l
+          echo MODNAME is: ${MODNAME}
+          echo testsecret is: ${testsecret}
+          echo hello > Test.txt
+        env:
+          MODNAME: ${{ inputs.MODNAME }}
+          testsecret: ${{ secrets.testsecret }}
+          
+      - name: Upload Release Build Artifact
+        if: ${{ inputs.UploadArtifact }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: .tmod file
+          path: ~/Test.txt
