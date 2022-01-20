@@ -36,6 +36,7 @@ jobs:
         uses: CyberAndrii/setup-steamcmd@v1
 
       - name: View steam install folder
+        shell: bash
         run: |
           echo pwd is: ${PWD}
           ls -l
@@ -59,6 +60,7 @@ jobs:
           ls -l
         
       - name: View steam install folder again
+        shell: bash
         run: |
           echo pwd is: ${PWD}
           ls -l
