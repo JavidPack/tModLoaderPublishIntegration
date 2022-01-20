@@ -72,7 +72,9 @@ jobs:
         shell: bash
         run: |
           echo Building ${{ inputs.MODNAME }}
-          dotnet tModLoader/tmodloader.dll -server -build "${{ github.workspace }}/ModSourceCode" -tmlsavedirectory ./ModLoader
+          cd tModLoader
+          dotnet tmodloader.dll -server -build "${{ github.workspace }}/ModSourceCode" -tmlsavedirectory ../ModLoader
+          cd ..
           cd ModLoader/Mods
           ls -l
         env:
