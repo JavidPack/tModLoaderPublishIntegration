@@ -35,12 +35,16 @@ jobs:
         shell: bash
         run: |
           echo pwd is: ${PWD}
-          ls -l
           echo MODNAME is: ${MODNAME}
           echo testsecret is: ${testsecret}
+          echo UploadArtifact is: ${UploadArtifact}
+          echo testInput is: ${testInput}
           echo hello > Test.txt
+          ls -l
         env:
           MODNAME: ${{ inputs.MODNAME }}
+          UploadArtifact: ${{ inputs.UploadArtifact }}
+          testInput: ${{ inputs.testInput }}
           testsecret: ${{ secrets.testsecret }}
           
       - name: Upload Release Build Artifact
