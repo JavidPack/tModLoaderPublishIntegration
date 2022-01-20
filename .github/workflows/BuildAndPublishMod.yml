@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          path: ModSourceCode
+          path: ${{ inputs.MODNAME }}
 
       - name: Echo Inputs
         shell: bash
