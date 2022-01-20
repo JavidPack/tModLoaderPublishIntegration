@@ -23,6 +23,8 @@ on:
         required: true
       STEAM_SENTRY_FILENAME:
         required: true
+      STEAM_SENTRY_FILE:
+        required: true
 
 jobs:
   BuildAndPublish:
@@ -41,6 +43,17 @@ jobs:
           echo pwd is: ${PWD}
           ls -l
         working-directory: ${{ steps.setupsteam.outputs.directory }}
+      
+      - name: Setup Authentication Files
+        shell: bash
+        run: |
+          ls -l
+          echo "$STEAM_SENTRY_FILE" >> $STEAM_SENTRY_FILENAME
+          ls -l
+          Certutil -hashfile $STEAM_SENTRY_FILENAME
+        env:
+          STEAM_SENTRY_FILENAME: ${{ secrets.STEAM_SENTRY_FILENAME }}
+          STEAM_SENTRY_FILE: ${{ secrets.STEAM_SENTRY_FILE }}
       
       - name: Setup Authentication Files
         shell: bash
