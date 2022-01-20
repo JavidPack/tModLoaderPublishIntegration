@@ -41,6 +41,7 @@ jobs:
           echo testInput is: ${testInput}
           echo hello > Test.txt
           ls -l
+          dotnet --version
         env:
           MODNAME: ${{ inputs.MODNAME }}
           UploadArtifact: ${{ inputs.UploadArtifact }}
