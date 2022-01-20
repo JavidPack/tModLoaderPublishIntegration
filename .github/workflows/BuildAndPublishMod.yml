@@ -29,7 +29,8 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
-        path: ModSourceCode
+        with:
+          path: ModSourceCode
       
       - name: Setup steamcmd
         id: setupsteam
