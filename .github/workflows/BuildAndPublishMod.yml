@@ -31,7 +31,18 @@ jobs:
       - uses: actions/checkout@v2
         with:
           path: ModSourceCode
-      
+
+      - name: Echo Inputs
+        shell: bash
+        run: |
+          echo pwd is: ${PWD}
+          echo MODNAME is: ${MODNAME}
+          echo UploadArtifact is: ${UploadArtifact}
+          ls -l
+        env:
+          MODNAME: ${{ inputs.MODNAME }}
+          UploadArtifact: ${{ inputs.UploadArtifact }}
+
       - name: Setup steamcmd
         id: setupsteam
         uses: CyberAndrii/setup-steamcmd@v1
@@ -42,7 +53,7 @@ jobs:
           echo pwd is: ${PWD}
           ls -l
         working-directory: ${{ steps.setupsteam.outputs.directory }}
-      
+
       - name: Setup Authentication Files
         shell: bash
         working-directory: ${{ steps.setupsteam.outputs.directory }}
@@ -67,19 +78,20 @@ jobs:
         env:
           STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
           STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
-        
+
       - name: Build Mod
         shell: bash
         run: |
-          echo Building ${{ inputs.MODNAME }}
+          echo Building $MODNAME
+          dotnet --version
           cd tModLoader
-          dotnet tmodloader.dll -server -build "${{ github.workspace }}/ModSourceCode" -tmlsavedirectory ../ModLoader
+          dotnet tmodloader.dll -server -build "${{ github.workspace }}/$MODNAME" -tmlsavedirectory ../ModLoader
           cd ..
           cd ModLoader/Mods
           ls -l
         env:
           MODNAME: ${{ inputs.MODNAME }}
-        
+
       - name: Publish Mod
         shell: bash
         run: |
@@ -91,23 +103,10 @@ jobs:
           echo pwd is: ${PWD}
           ls -l
         working-directory: ${{ steps.setupsteam.outputs.directory }}
-      
-      - name: Echo Inputs
-        shell: bash
-        run: |
-          echo pwd is: ${PWD}
-          echo MODNAME is: ${MODNAME}
-          echo UploadArtifact is: ${UploadArtifact}
-          echo hello > Test.txt
-          ls -l
-          dotnet --version
-        env:
-          MODNAME: ${{ inputs.MODNAME }}
-          UploadArtifact: ${{ inputs.UploadArtifact }}
-          
+
       - name: Upload Release Build Artifact
         if: ${{ inputs.UploadArtifact }}
         uses: actions/upload-artifact@v2
         with:
           name: .tmod file
-          path: Test.txt
+          path: ModLoader/Mods/${{ inputs.MODNAME }}.tmod
