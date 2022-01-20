@@ -18,6 +18,10 @@ on:
         required: true
       STEAM_SENTRY_FILE:
         required: true
+      STEAM_USERNAME:
+        required: true
+      STEAM_PASSWORD:
+        required: true
 
 jobs:
   BuildAndPublish:
@@ -54,8 +58,13 @@ jobs:
         shell: bash
         run: |
           echo pwd is: ${PWD}
-          steamcmd.exe +login anonymous +quit
+          steamcmd.exe +force_install_dir "${GITHUB_WORKSPACE}/tModLoader" +login "$STEAM_USERNAME" "$STEAM_PASSWORD" "+app_update 1281930 -validate -beta public-1.4-alpha" +quit
           ls -l
+          cd "${GITHUB_WORKSPACE}/tModLoader"
+          ls -l
+        env:
+          STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
+          STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
         
       - name: View steam install folder again
         shell: bash
