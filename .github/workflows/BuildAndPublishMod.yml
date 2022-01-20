@@ -48,7 +48,7 @@ jobs:
         shell: bash
         run: |
           ls -l
-          echo "$STEAM_SENTRY_FILE" >> $STEAM_SENTRY_FILENAME
+          echo $STEAM_SENTRY_FILE | base64 --decode > $STEAM_SENTRY_FILENAME
           ls -l
           Certutil -hashfile $STEAM_SENTRY_FILENAME
         env:
