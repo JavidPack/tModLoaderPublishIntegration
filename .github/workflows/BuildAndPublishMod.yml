@@ -29,6 +29,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
+        path: ModSourceCode
       
       - name: Setup steamcmd
         id: setupsteam
@@ -65,6 +66,21 @@ jobs:
         env:
           STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
           STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
+        
+      - name: Build Mod
+        shell: bash
+        run: |
+          echo Building ${{ inputs.MODNAME }}
+          dotnet tModLoader/tmodloader.dll -server -build "${{ github.workspace }}/ModSourceCode" -tmlsavedirectory ./ModLoader
+          cd ModLoader/Mods
+          ls -l
+        env:
+          MODNAME: ${{ inputs.MODNAME }}
+        
+      - name: Publish Mod
+        shell: bash
+        run: |
+          echo Publish Mod here
         
       - name: View steam install folder again
         shell: bash
