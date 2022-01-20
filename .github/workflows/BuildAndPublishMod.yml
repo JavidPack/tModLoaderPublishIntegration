@@ -43,10 +43,11 @@ jobs:
         run: |
           echo pwd is: ${PWD}
           echo "$STEAM_SENTRY_FILE" > encoded_ssfn
-          Certutil -decode encoded_ssfn ${{ secrets.STEAM_SENTRY_FILENAME }}
-          Certutil -hashfile ${{ secrets.STEAM_SENTRY_FILENAME }}
+          Certutil -decode encoded_ssfn $STEAM_SENTRY_FILENAME
+          Certutil -hashfile $STEAM_SENTRY_FILENAME
           ls -l
         env:
+          STEAM_SENTRY_FILENAME: ${{ secrets.STEAM_SENTRY_FILENAME }}
           STEAM_SENTRY_FILE: ${{ secrets.STEAM_SENTRY_FILE }}
 
       - name: Install tModLoader public-1.4-alpha via Steam
