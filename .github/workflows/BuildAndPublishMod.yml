@@ -43,7 +43,7 @@ jobs:
       
       - name: Setup Authentication Files
         shell: bash
-        working-directory: ${{ steps.setupsteam.outputs.directory }}
+        working-directory: ~/Steam
         run: |
           echo pwd is: ${PWD}
           echo "$STEAM_SENTRY_FILE" > encoded_ssfn
