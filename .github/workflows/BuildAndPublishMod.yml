@@ -38,7 +38,7 @@ jobs:
       - name: View steam install folder
         run: |
           echo pwd is: ${PWD}
-          ls -alhR
+          ls -l
         working-directory: ${{ steps.setupsteam.outputs.directory }}
       
       - name: Setup Authentication Files
@@ -61,7 +61,7 @@ jobs:
       - name: View steam install folder again
         run: |
           echo pwd is: ${PWD}
-          ls -alhR
+          ls -l
         working-directory: ${{ steps.setupsteam.outputs.directory }}
       
       - name: Echo Inputs
