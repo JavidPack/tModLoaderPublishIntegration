@@ -7,6 +7,7 @@ on:
         description: The internal name of the mod. Defaults to the repository name.
         required: false
         default: ${{ github.event.repository.name }}
+        type: string
       testInput:
         required: true
         type: string
